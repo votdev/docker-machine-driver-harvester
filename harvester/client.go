@@ -9,6 +9,8 @@ import (
 	harvclient "github.com/harvester/harvester/pkg/generated/clientset/versioned"
 	"github.com/harvester/harvester/pkg/generated/clientset/versioned/scheme"
 	cniv1 "github.com/k8snetworkplumbingwg/network-attachment-definition-client/pkg/apis/k8s.cni.cncf.io/v1"
+	provisioningv1 "github.com/rancher/rancher/pkg/apis/provisioning.cattle.io/v1"
+	rancherclient "github.com/rancher/rancher/pkg/generated/clientset/versioned"
 	"github.com/rancher/wrangler/pkg/kubeconfig"
 	corev1 "k8s.io/api/core/v1"
 	storagev1 "k8s.io/api/storage/v1"
@@ -25,6 +27,7 @@ type Client struct {
 	KubeVirtSubresourceClient *rest.RESTClient
 	HarvesterClient           *harvclient.Clientset
 	KubeClient                *kubernetes.Clientset
+	RancherClient             *rancherclient.Clientset
 }
 
 func NewClientFromRestConfig(restConfig *rest.Config) (*Client, error) {
@@ -44,11 +47,16 @@ func NewClientFromRestConfig(restConfig *rest.Config) (*Client, error) {
 	if err != nil {
 		return nil, err
 	}
+	rancherClient, err := rancherclient.NewForConfig(restConfig)
+	if err != nil {
+		return nil, err
+	}
 	return &Client{
 		RestConfig:                restConfig,
 		KubeVirtSubresourceClient: kubeVirtSubresourceClient,
 		HarvesterClient:           harvClient,
 		KubeClient:                kubeClient,
+		RancherClient:             rancherClient,
 	}, nil
 }
 
@@ -165,6 +173,14 @@ func (d *Driver) getVM() (*kubevirtv1.VirtualMachine, error) {
 		return nil, err
 	}
 	return c.HarvesterClient.KubevirtV1().VirtualMachines(d.VMNamespace).Get(d.ctx, d.MachineName, metav1.GetOptions{})
+}
+
+func (d *Driver) getCluster() (*provisioningv1.Cluster, error) {
+	c, err := d.getClient()
+	if err != nil {
+		return nil, err
+	}
+	return c.RancherClient.ProvisioningV1().Clusters(d.VMNamespace).Get(d.ctx, d.ClusterID, metav1.GetOptions{})
 }
 
 func (d *Driver) updateVM(newVM *kubevirtv1.VirtualMachine) (*kubevirtv1.VirtualMachine, error) {

@@ -70,6 +70,8 @@ require (
 	github.com/imdario/mergo v0.3.16
 	github.com/k8snetworkplumbingwg/network-attachment-definition-client v1.3.0
 	github.com/rancher/machine v0.15.0-rancher99
+	github.com/rancher/rancher v0.0.0-20230124173128-2207cfed1803
+	github.com/rancher/rancher/pkg/apis v0.0.0
 	github.com/rancher/wrangler v1.1.2
 	github.com/stretchr/testify v1.9.0
 	k8s.io/api v0.30.3
@@ -148,7 +150,6 @@ require (
 	github.com/rancher/gke-operator v1.9.0 // indirect
 	github.com/rancher/lasso v0.0.0-20240725131814-f16ff2c25dc3 // indirect
 	github.com/rancher/norman v0.0.0-20240708202514-a0127673d1b9 // indirect
-	github.com/rancher/rancher/pkg/apis v0.0.0 // indirect
 	github.com/rancher/rke v1.6.0 // indirect
 	github.com/rancher/system-upgrade-controller/pkg/apis v0.0.0-20230803010539-04a0b9ef5858 // indirect
 	github.com/rancher/wrangler/v3 v3.0.0 // indirect

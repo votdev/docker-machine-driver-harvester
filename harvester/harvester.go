@@ -180,10 +180,23 @@ func (d *Driver) Remove() error {
 		}
 		return err
 	}
+
+	cluster, err := d.getCluster()
+	if err != nil {
+		if apierrors.IsNotFound(err) {
+			return nil
+		}
+		return err
+	}
+	// If the cluster is being deleted, all PVCs should be deleted.
+	purgeAll := cluster.DeletionTimestamp != nil
+
 	removedPVCs := make([]string, 0, len(vm.Spec.Template.Spec.Volumes))
 	for _, volume := range vm.Spec.Template.Spec.Volumes {
-		if volume.PersistentVolumeClaim == nil || volume.PersistentVolumeClaim.Hotpluggable {
-			continue
+		if !purgeAll {
+			if volume.PersistentVolumeClaim == nil || volume.PersistentVolumeClaim.Hotpluggable {
+				continue
+			}
 		}
 		removedPVCs = append(removedPVCs, volume.PersistentVolumeClaim.ClaimName)
 	}

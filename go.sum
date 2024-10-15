@@ -1098,6 +1098,8 @@ github.com/rancher/machine v0.15.0-rancher114 h1:ZbuzxWmeES8etLlTQs/BN3WqQTFG4pC
 github.com/rancher/machine v0.15.0-rancher114/go.mod h1:mW5lOD5SGwngmmUtEdNboHuHxO5DlgVXmF5RKgpAuRc=
 github.com/rancher/norman v0.0.0-20240708202514-a0127673d1b9 h1:AlRMRs5mHJcdiK83KKJyFVeybPMZ7dOUzC0l3k9aUa8=
 github.com/rancher/norman v0.0.0-20240708202514-a0127673d1b9/go.mod h1:dyjfXBsNiroPWOdUZe7diUOUSLf6HQ/r2kEpwH/8zas=
+github.com/rancher/rancher v0.0.0-20230124173128-2207cfed1803 h1:iAEN7Dek9DeGNktZHOBkCKcqN+ejAOEznb2lZ15Gobc=
+github.com/rancher/rancher v0.0.0-20230124173128-2207cfed1803/go.mod h1:aJq6XNImSP7GSNrgRGEoQVbcpFln7Be7e+A3+UmGH8Q=
 github.com/rancher/rancher/pkg/apis v0.0.0-20240730202829-9e0cc54e7e3a h1:lt95F9b2O7b3f1nRA3hehv2KH0vI0pjbQFDkKvfiE0k=
 github.com/rancher/rancher/pkg/apis v0.0.0-20240730202829-9e0cc54e7e3a/go.mod h1:aQ7WsDz/lGZlBVr2g5V7N0zViuXnDFdo2TYXFKYDBQ4=
 github.com/rancher/rke v1.6.0 h1:fHdygmtPF1cWXuiYXfwgG4hKvt0n4l57SwCxquRJSfs=
